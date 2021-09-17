@@ -9,3 +9,16 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Trimmr.Repo
+alias Trimmr.Links.URL
+
+Faker.start()
+
+for i <- 1..5 do
+  %URL{}
+  |> URL.changeset(%{
+    full: Faker.Internet.url()
+  })
+  |> Repo.insert!()
+end

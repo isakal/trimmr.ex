@@ -1,4 +1,4 @@
-# Trimmr.ex
+# trimmr.ex
 
 To start your Phoenix server:
 

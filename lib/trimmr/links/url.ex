@@ -4,7 +4,7 @@ defmodule Trimmr.Links.URL do
 
   schema "urls" do
     field :full, :string
-    field :short, :string, default: Nanoid.generate()
+    field :short, :string
     field :clicks, :integer, default: 0
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule Trimmr.Links.URL do
   def changeset(url, attrs) do
     url
     |> cast(attrs, [:full, :short, :clicks])
-    # |> put_change(:short, Nanoid.generate())
+    |> put_change(:short, Nanoid.generate())
     |> validate_required([:full, :short, :clicks])
     |> unique_constraint(:full)
   end

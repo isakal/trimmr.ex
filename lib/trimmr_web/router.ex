@@ -7,7 +7,12 @@ defmodule TrimmrWeb.Router do
 
   scope "/api", TrimmrWeb do
     pipe_through :api
-    resources "/urls", URLController
+
+    scope "/urls" do
+      resources "/", URLController
+
+      get "/redirect/:short", URLController, :redirect_to_short
+    end
   end
 
   # Enables LiveDashboard only for development

@@ -21,7 +21,24 @@ defmodule TrimmrWeb.URLController do
   end
 
   def show(conn, %{"id" => id}) do
-    url = Links.get_url!(id)
+    url = Links.get_url(id)
     render(conn, "show.json", url: url)
+  end
+
+  def redirect_to_short(conn, %{"short" => short}) do
+    url = Links.get_url_by_short(short)
+
+    case url do
+      nil ->
+        conn
+        |> put_status(404)
+        |> render("404.json")
+
+      _ ->
+        IO.puts(url.short)
+
+        conn
+        |> redirect(external: url.full)
+    end
   end
 end

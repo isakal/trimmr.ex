@@ -35,7 +35,7 @@ defmodule Trimmr.Links do
       ** (Ecto.NoResultsError)
 
   """
-  def get_url!(id), do: Repo.get!(URL, id)
+  def get_url(id), do: Repo.get(URL, id)
 
   @doc """
   Creates a url.
@@ -55,50 +55,11 @@ defmodule Trimmr.Links do
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a url.
-
-  ## Examples
-
-      iex> update_url(url, %{field: new_value})
-      {:ok, %URL{}}
-
-      iex> update_url(url, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_url(%URL{} = url, attrs) do
-    url
-    |> URL.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a url.
-
-  ## Examples
-
-      iex> delete_url(url)
-      {:ok, %URL{}}
-
-      iex> delete_url(url)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_url(%URL{} = url) do
-    Repo.delete(url)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking url changes.
-
-  ## Examples
-
-      iex> change_url(url)
-      %Ecto.Changeset{data: %URL{}}
-
-  """
-  def change_url(%URL{} = url, attrs \\ %{}) do
-    URL.changeset(url, attrs)
+  def get_url_by_short(short) do
+    Repo.one(
+      from u in URL,
+        where: u.short == ^short,
+        select: u
+    )
   end
 end

@@ -11,9 +11,12 @@ defmodule TrimmrWeb.URLView do
   end
 
   def render("url.json", %{url: url}) do
-    %{id: url.id,
-      full: url.full,
-      short: url.short,
-      clicks: url.clicks}
+    %{id: url.id, full: url.full, short: url.short, clicks: url.clicks}
+  end
+
+  def render("404.json", _) do
+    %{
+      error: "No URL found with provided hash."
+    }
   end
 end
