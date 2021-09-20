@@ -55,6 +55,14 @@ defmodule Trimmr.Links do
     |> Repo.insert()
   end
 
+  def get_url_by_full(full) do
+    Repo.one(
+      from u in URL,
+        where: u.full == ^full,
+        select: u
+    )
+  end
+
   def get_url_by_short(short) do
     Repo.one(
       from u in URL,
